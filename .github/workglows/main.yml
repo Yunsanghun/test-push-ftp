@@ -1,0 +1,18 @@
+on: push
+name: Deploy websait on push
+jobs:
+  web-deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: latest code
+      uses: action/checkout@v3
+
+    - name: Sync files
+      uses: Samkirkland.FTP-Deploy-Action@v4.3.4
+      with:
+        server: ftp.jrbaik100.mycafe24.com
+        username: ${{  secrets.FTPUSERNAME  }}
+        passwoed: ${{  secrets.FTPPASSWORD  }}
+        protocol: ftps
+        sever-dir: public_html/test-push-ftp/
